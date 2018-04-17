@@ -96,7 +96,7 @@ contract BitImageTokenSale is Pausable {
             0x0FDE8220378615701F6780e19BC1C7C686672c3E,
             0xc7754c583cb96D9C96ecf29B4f0A5c8e72901BBe
         ];
-        periodPresale = 2 weeks;
+        periodPresale = 3 weeks;
         periodCrowdsale = 6 weeks;
         periodWeek = 1 weeks;
         weiMinInvestment = 0.1 ether;

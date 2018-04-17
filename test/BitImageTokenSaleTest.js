@@ -54,9 +54,9 @@ contract('BitImageTokenSale [initializing state variables]', () => {
         assert.notEqual(walletTokenReservation, 0x0);
     });
 
-    it('should have presale period equals 2 weeks', async () => {
+    it('should have presale period equals 3 weeks', async () => {
         let periodPresale = await crowdsale.periodPresale();
-        assert.equal(periodPresale, weeksToSeconds(2));
+        assert.equal(periodPresale, weeksToSeconds(3));
     });
 
     it('should have crowdsale period equals 6 weeks', async () => {
