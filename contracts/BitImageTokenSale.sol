@@ -85,27 +85,27 @@ contract BitImageTokenSale is Pausable {
      * @dev Constructor for a crowdsale of BitImageToken tokens.
      */
     function BitImageTokenSale() public {
-        walletEtherPresale = 0xD3e6686fD63e2828f6aC8caA1A37C077d59740ef;
-        walletEhterCrowdsale = 0x774df4f75F205371471E0E29D8C11162f9DEc538;
-        walletTokenTeam = 0xa14CF5D1C2F9dD9F9656F9EF94Fb837c873E0CD1;
-        walletTokenBounty = 0x2BD73853a4660fa93C061FB73f07fb69855A6f71;
-        walletTokenReservation = 0x71Ff6c566cF153490396FC1ef5E4E9DaaA131456;
+        walletEtherPresale = 0xE19f0ccc003a36396FE9dA4F344157B2c60A4B8E;
+        walletEhterCrowdsale = 0x10e5f0e94A43FA7C9f7F88F42a6a861312aD1d31;
+        walletTokenTeam = 0x35425E32fE41f167990DBEa1010132E9669Fa500;
+        walletTokenBounty = 0x91325c4a25893d80e26b4dC14b964Cf5a27fECD8;
+        walletTokenReservation = 0x4795eC1E7C24B80001eb1F43206F6e075fCAb4fc;
         walletTokenAdvisors = [
-            0x9a4df9717E6BbCDB747e578C28a7263933F7A89a,
-            0xbFf2173e56F3b2868E7369Edca9b2baCAeDa5561,
-            0x0FDE8220378615701F6780e19BC1C7C686672c3E,
-            0xc7754c583cb96D9C96ecf29B4f0A5c8e72901BBe
+            0x2E308F904C831e41329215a4807d9f1a82B67eE2,
+            0x331274f61b3C976899D6FeB6f18A966A50E98C8d,
+            0x6098b02d10A1f27E39bCA219CeB56355126EC74f,
+            0xC14C105430C13e6cBdC8DdB41E88fD88b9325927
         ];
-        periodPresale = 3 weeks;
+        periodPresale = 4 weeks;
         periodCrowdsale = 6 weeks;
         periodWeek = 1 weeks;
         weiMinInvestment = 0.1 ether;
         weiMaxInvestment = 500 ether;
-        rate = 115400;
-        softCap = 2300 ether;
-        goal = 6700 ether;
+        rate = 130000;
+        softCap = 2000 ether;
+        goal = 6000 ether;
         goalIncrement = goal;
-        hardCap = 47000 ether;
+        hardCap = 42000 ether;
         bonus = 30;
         bonusDicrement = 5;
         state = State.NEW;

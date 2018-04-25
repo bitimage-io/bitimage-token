@@ -27,7 +27,9 @@ async function sendTransaction(_crowdsale, _value, _from) {
         await _crowdsale.sendTransaction({value: MAX_ETH, from: _from});
     }
     let y_ = _value - n * MAX_ETH;
-    await _crowdsale.sendTransaction({value: y_, from: _from});
+    if (y_ > 0) {
+        await _crowdsale.sendTransaction({value: y_, from: _from});
+    }
 }
 
 contract('BitImageTokenSale [initializing state variables]', () => {
@@ -54,13 +56,13 @@ contract('BitImageTokenSale [initializing state variables]', () => {
         assert.notEqual(walletTokenReservation, 0x0);
     });
 
-    it('should have presale period equals 3 weeks', async () => {
-        let periodPresale = await crowdsale.periodPresale();
-        assert.equal(periodPresale, weeksToSeconds(3));
+    it('should have presale period equals 4 weeks', async () => {
+        let periodPresale = (await crowdsale.periodPresale()).toNumber();
+        assert.equal(periodPresale, weeksToSeconds(4));
     });
 
     it('should have crowdsale period equals 6 weeks', async () => {
-        let periodCrowdsale = await crowdsale.periodCrowdsale();
+        let periodCrowdsale = (await crowdsale.periodCrowdsale()).toNumber();
         assert.equal(periodCrowdsale, weeksToSeconds(6));
     });
 
@@ -74,19 +76,19 @@ contract('BitImageTokenSale [initializing state variables]', () => {
         assert.equal(weiMinInvestment, MIN_ETH);
     });
 
-    it('should have rate 1 ETH = 115400 BIM', async () => {
+    it('should have rate 1 ETH = 130000 BIM', async () => {
         let rate = (await crowdsale.rate()).toNumber();
-        assert.equal(rate, 115400);
+        assert.equal(rate, 130000);
     });
 
-    it('should have softCap equals 2300 ETH', async () => {
+    it('should have softCap equals 2000 ETH', async () => {
         let softCap = (await crowdsale.softCap()).toNumber();
-        assert.equal(softCap, toWei(2300));
+        assert.equal(softCap, toWei(2000));
     });
 
-    it('should have goal equals 6700 ETH', async () => {
+    it('should have goal equals 6000 ETH', async () => {
         let goal = (await crowdsale.goal()).toNumber();
-        assert.equal(goal, toWei(6700));
+        assert.equal(goal, toWei(6000));
     });
 
     it('should have goal increment equals goal', async () => {
@@ -95,9 +97,9 @@ contract('BitImageTokenSale [initializing state variables]', () => {
         assert.equal(goalIncrement, goal);
     });
 
-    it('should have hardCap equals 47000 ETH', async () => {
+    it('should have hardCap equals 42000 ETH', async () => {
         let hardCap = (await crowdsale.hardCap()).toNumber();
-        assert.equal(hardCap, toWei(47000));
+        assert.equal(hardCap, toWei(42000));
     });
 
     it('should have initial bonus equals 30%', async () => {
@@ -390,7 +392,7 @@ contract('BitImageTokenSale [fallback fucntion]', () => {
         await crowdsale.start(startTime);
         await timer.increaseTime(timer.duration.seconds(10));
         period = (await crowdsale.period()).toNumber();
-        weiAmount = (await crowdsale.goal()).toNumber() - (await crowdsale.weiTotalReceived()).toNumber() + MIN_ETH;
+        weiAmount = (await crowdsale.goal()).toNumber() - (await crowdsale.weiTotalReceived()).toNumber();
         let goal = (await crowdsale.goal()).toNumber();
         await sendTransaction(crowdsale, weiAmount, USER);
         assert.equal((await crowdsale.startTime()).toNumber(), startTime, 'wrong start time');
@@ -448,10 +450,10 @@ contract('BitImageTokenSale [fallback fucntion]', () => {
         await crowdsale.start(startTime);
         assert.equal((await crowdsale.bonus()).toNumber(), 25, 'wrong bonus');
         await timer.increaseTime(timer.duration.seconds(10));
-        weiAmount = (await crowdsale.goal()).toNumber() - (await crowdsale.weiTotalReceived()).toNumber() + MIN_ETH;
+        weiAmount = (await crowdsale.goal()).toNumber() - (await crowdsale.weiTotalReceived()).toNumber();
         await sendTransaction(crowdsale, weiAmount, USER);
         assert.equal((await crowdsale.bonus()).toNumber(), 20, 'wrong bonus');
-        weiAmount = (await crowdsale.goal()).toNumber() - (await crowdsale.weiTotalReceived()).toNumber() + MIN_ETH;
+        weiAmount = (await crowdsale.goal()).toNumber() - (await crowdsale.weiTotalReceived()).toNumber();
         await sendTransaction(crowdsale, weiAmount, USER);
         assert.equal((await crowdsale.bonus()).toNumber(), 15, 'wrong bonus');
         await timer.increaseTime(timer.duration.weeks(2));

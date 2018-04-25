@@ -25,7 +25,7 @@ contract('BitImageToken [initializing state variables]', () => {
 
     it('should have \'BitImage Token\' name', async () => {
         let name = await token.name();
-        assert.equal(name, 'BitImage Token');
+        assert.equal(name, 'Bitimage Token');
     });
 
     it('should have \'BIM\' symbol', async () => {

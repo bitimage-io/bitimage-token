@@ -44,7 +44,7 @@ contract BitImageToken is StandardToken, BurnableToken, Ownable {
      * @dev Constructor instantiates token supply and allocates balanace to the owner.
      */
     function BitImageToken() public {
-        name = "BitImage Token";
+        name = "Bitimage Token";
         symbol = "BIM";
         decimals = 18;
         released = false;
